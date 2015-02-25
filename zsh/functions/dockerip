@@ -1,0 +1,5 @@
+# Gets the IP address for a docker container ID
+# Example: dockerip bcd
+function dockerip() {
+  docker inspect --format '{{ .NetworkSettings.IPAddress }}' $@;
+}

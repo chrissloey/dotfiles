@@ -1,0 +1,8 @@
+.DS_Store
+.env
+tags
+dump.rdb
+db/*.sqlite3
+log/*.log
+tmp/**/*
+.netrwhist

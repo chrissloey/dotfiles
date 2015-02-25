@@ -1,0 +1,9 @@
+# Gets a .gitignore template for provided languages, 
+# tools, frameworks etc.
+#
+# Examples:
+#   - gi ruby
+#   - gi rails,rubymine
+function gi() {
+  curl https://www.gitignore.io/api/$@;
+}
