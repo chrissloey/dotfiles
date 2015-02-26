@@ -76,6 +76,7 @@ function require_gem() {
 }
 
 require_gem cocoapods
+require_gem git-up
 rbenv rehash
 
 # Docker ansible
