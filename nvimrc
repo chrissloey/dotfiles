@@ -9,6 +9,10 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'dbakker/vim-projectroot'
 Plug 'terryma/vim-multiple-cursors'
 
+" Notes
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+
 " Statusbar 
 Plug 'bling/vim-airline'
 
@@ -69,7 +73,6 @@ set showcmd       " display incomplete commands
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 
-" Configuration 
 " Status Bar 
 set laststatus=2
 let g:airline_powerline_fonts=1
@@ -152,6 +155,9 @@ colorscheme github
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
+
+" Notes 
+:let g:notes_directories = ['~/Dropbox/Notes']
 
 " NetRW
 set autochdir
