@@ -132,7 +132,7 @@ nnoremap <C-P> :call Unite_ctrlp()<cr>
 nnoremap <leader>y :Unite history/yank<cr>
 nnoremap <leader>s :Unite -quick-match buffer<cr>
 
-" Search 
+" Search
 set nohlsearch
 set incsearch
 set ignorecase
@@ -140,7 +140,7 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set magic
 set wildmode=longest:full,list:full
 
-" Terminal Bells 
+" Terminal Bells
 set visualbell
 set noerrorbells
 set noerrorbells visualbell t_vb=
@@ -153,11 +153,11 @@ highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
 
-" NetRW 
+" NetRW
 set autochdir
 let g:netrw_banner=0
 
-" Editor settings 
+" Editor settings
 set nowrap
 set number
 set numberwidth=5
@@ -226,5 +226,3 @@ augroup vimrcEx
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
-
-

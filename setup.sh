@@ -22,8 +22,8 @@ brew tap homebrew/versions
 
 require_brew rbenv
 require_brew ruby-build
-rbenv install 2.2
-rbenv global 2.2
+rbenv install 2.2.0
+rbenv global 2.2.0
 rbenv rehash
 
 require_brew openssl
@@ -42,7 +42,7 @@ require_brew ansible
 require_brew postgres
 
 brew tap neovim/homebrew-neovim
-require_brew nvim
+brew install --HEAD neovim
 
 brew tap homebrew/homebrew-php
 require_brew php55

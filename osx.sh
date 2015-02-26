@@ -138,7 +138,7 @@ defaults write com.twitter.twitter-mac openLinksInBackground -bool true
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "SystemUIServer" \
-	"Terminal" "Twitter"; do
+	"Twitter"; do
 	killall "${app}" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
