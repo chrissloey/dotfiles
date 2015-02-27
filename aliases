@@ -1,2 +1,2 @@
+unalias d
 alias vim="nvim"
-

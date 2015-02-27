@@ -1,0 +1,24 @@
+# Acts like `docker`
+# No arguments: `docker status`
+# Ensures docker env is setup
+# Starts docker-machine if necessary
+d() {
+  if [ -z "$DOCKER_HOST" ];
+    then $(docker-machine env)
+  fi
+
+  if [[ $# > 0 ]]; then
+    docker $@
+  else
+    docker ps
+  fi
+
+  # Start docker-machine if the command failed
+  if [ "$?" -ne "0" ]; then
+    echo "Starting docker"
+    docker-machine start $(docker-machine active)
+    d $@
+  fi
+}
+
+compdef d=docker
