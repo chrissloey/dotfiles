@@ -24,6 +24,7 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'ecomba/vim-ruby-refactoring'
+Plug 'thoughtbot/vim-rspec'
 
 " Elixir 
 Plug 'elixir-lang/vim-elixir'
@@ -156,11 +157,17 @@ highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
 
-" Notes 
+" Notes
 :let g:notes_directories = ['~/Dropbox/Notes']
 
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_runner = "os_x_iterm"
+
 " NetRW
-set autochdir
 let g:netrw_banner=0
 
 " Editor settings
