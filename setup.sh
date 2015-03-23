@@ -27,7 +27,6 @@ rbenv global 2.2.0
 rbenv rehash
 
 require_brew openssl
-require_brew boot2docker
 require_brew docker
 require_brew python
 require_brew fig
