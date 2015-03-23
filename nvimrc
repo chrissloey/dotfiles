@@ -4,10 +4,13 @@ let mapleader = " "
 " Plugins 
 call plug#begin('~/.nvim/plugged')
 
-Plug 'kchmck/vim-coffee-script'
-Plug 'vim-scripts/matchit.zip'
+Plug 'Shougo/vimproc.vim'
+
+" Editing
 Plug 'dbakker/vim-projectroot'
+Plug 'vim-scripts/matchit.zip'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
 
 " Notes
 Plug 'xolox/vim-misc'
@@ -33,6 +36,9 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'Rykka/colorv.vim'
 
+" JS
+Plug 'kchmck/vim-coffee-script'
+
 " Markdown 
 Plug 'plasticboy/vim-markdown'
 
@@ -41,6 +47,7 @@ Plug 'mustache/vim-mustache-handlebars'
 
 " Git 
 Plug 'airblade/vim-gitgutter'
+Plug 'mattn/webapi-vim' " gist-vim dependency
 Plug 'mattn/gist-vim'
 
 " Search 
@@ -88,11 +95,12 @@ let g:gist_private = 1
 " Unite 
 
 " Excluded directories for unite
-call unite#custom_source('file_rec/async,file_mru,file,buffer,grep',
+call unite#custom_source('file_rec/async,file_rec,file_mru,file,buffer,grep',
   \ 'ignore_pattern', join([
   \ '\.git/',
   \ '\.sass-cache/',
-  \ '\node_modules/',
+  \ 'node_modules/',
+  \ 'bower_components/',
   \ '\.svn/',
   \ '\.hg/',
   \ '\.bundle/',
@@ -104,11 +112,12 @@ call unite#custom_source('file_rec/async,file_mru,file,buffer,grep',
 " Ctrlp replacement
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
+let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
 
 " Build the ctrlp function, using projectroot to define the 
 " working directory.
 function! Unite_ctrlp()
-  execute ':Unite  -buffer-name=files -start-insert buffer file_rec:'.ProjectRootGuess().'/'
+  execute ':Unite  -buffer-name=files -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
 endfunction
 
 " Call these custom settings on all unite buffers:

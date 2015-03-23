@@ -30,3 +30,6 @@ antigen apply
 for function in ~/.zsh/functions/*; do
   source $function
 done
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
