@@ -22,8 +22,8 @@ brew tap homebrew/versions
 
 require_brew rbenv
 require_brew ruby-build
-rbenv install 2.2.0
-rbenv global 2.2.0
+rbenv install 2.2.1
+rbenv global 2.2.1
 rbenv rehash
 
 require_brew openssl
