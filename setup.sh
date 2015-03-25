@@ -40,6 +40,7 @@ require_brew the_silver_searcher
 require_brew ansible
 require_brew postgres
 require_brew carthage
+require_brew autoenv
 
 brew tap neovim/homebrew-neovim
 brew install --HEAD neovim
