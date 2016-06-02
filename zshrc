@@ -36,3 +36,13 @@ export PATH="/usr/local/heroku/bin:$PATH"
 source /usr/local/opt/autoenv/activate.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="/usr/local/sbin:$PATH"
+
+source /Users/$USER/.iterm2_shell_integration.zsh
+
+# added by travis gem
+[ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh
+
+eval "$(rbenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"

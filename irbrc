@@ -13,7 +13,7 @@ rescue LoadError => e
 
   begin
     require 'awesome_print' # Awesome Print pretty prints Ruby objects in full color
-    #AwesomePrint.irb!
+    AwesomePrint.irb!
   rescue LoadError => err
     warn "Couldn't load 'awesome_print': #{err}"
   end

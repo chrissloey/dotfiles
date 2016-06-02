@@ -60,6 +60,8 @@ Plug 'croaky/vim-colors-github'
 " EditorConfig 
 Plug 'editorconfig/editorconfig-vim'
 
+" Pane Management
+Plug 'itspriddle/ZoomWin'
 
 call plug#end()
 
@@ -106,7 +108,8 @@ call unite#custom_source('file_rec/async,file_rec,file_mru,file,buffer,grep',
   \ '\.bundle/',
   \ 'vendor/',
   \ 'tmp/',
-  \ 'log/'
+  \ 'log/',
+  \ 'public/system'
   \ ], '\|'))
 
 " Ctrlp replacement

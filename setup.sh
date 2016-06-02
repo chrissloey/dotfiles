@@ -22,25 +22,20 @@ brew tap homebrew/versions
 
 require_brew rbenv
 require_brew ruby-build
-rbenv install 2.2.1
-rbenv global 2.2.1
-rbenv rehash
-
 require_brew openssl
 require_brew docker
 require_brew python
-require_brew fig
 require_brew zsh
 require_brew git
 require_brew hub
 require_brew imagemagick
 require_brew redis
-require_brew node
+require_brew nvm
 require_brew the_silver_searcher
 require_brew ansible
-require_brew postgres
-require_brew carthage
 require_brew autoenv
+require_brew z
+require_brew elixir
 
 brew tap neovim/homebrew-neovim
 brew install --HEAD neovim
@@ -51,6 +46,32 @@ require_brew homebrew/php/composer
 
 brew tap thoughtbot/formulae
 require_brew rcm
+
+# Make things we just installed useable
+export PATH=/usr/local/bin:$PATH
+
+# Change login shell to zsh
+echo "Setting zsh as user shell"
+sudo dscl . -create $HOME UserShell /usr/local/bin/zsh
+chsh -s /usr/local/bin/zsh
+
+# Install dotfiles
+echo "Installing dotfiles"
+rcup -v
+
+# Install ruby
+echo "Installing ruby"
+rbenv install 2.3.0
+rbenv global 2.3.0
+rbenv rehash
+
+
+# Node
+echo "Installing node"
+export NVM_DIR=$HOME/.nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # load nvm
+nvm install node
+nvm alias default node
 
 # NPM
 npmlist=`npm list -g`
@@ -64,7 +85,9 @@ function require_npm() {
 }
 
 require_npm bower
-require_npm grunt
+require_npm mocha
+require_npm rnpm
+require_npm react-native-cli
 
 # Gems
 function require_gem() {
@@ -76,9 +99,24 @@ function require_gem() {
     fi
 }
 
+require_gem bundler
+require_gem rails
 require_gem cocoapods
-require_gem git-up
+require_gem awesome_print
 rbenv rehash
 
 # Docker ansible
+pip install --upgrade pip
 pip install docker-py
+
+# Done
+echo
+echo "===================="
+echo "All done."
+echo "===================="
+echo
+echo "Some todos:"
+echo "  - Update gitconfig with correct details if you're not me"
+echo "  - Either install iterm shell integration, or remove it from ~/.zshrc"
+echo "  - Install docker"
+echo "  - Make sure nvm and rbenv installed stuff"

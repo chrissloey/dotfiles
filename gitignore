@@ -1,3 +1,4 @@
+1
 .DS_Store
 .env
 tags
@@ -6,3 +7,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .netrwhist
+.byebug_history
+.vscode/
+tsconfig.json
+config.codekit
