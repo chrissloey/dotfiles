@@ -103,6 +103,7 @@ require_gem bundler
 require_gem rails
 require_gem cocoapods
 require_gem awesome_print
+require_gem fastlane
 rbenv rehash
 
 # Docker ansible
