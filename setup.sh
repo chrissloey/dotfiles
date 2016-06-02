@@ -36,6 +36,7 @@ require_brew ansible
 require_brew autoenv
 require_brew z
 require_brew elixir
+require_brew watchman
 
 brew tap neovim/homebrew-neovim
 brew install --HEAD neovim
