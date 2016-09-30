@@ -1,4 +1,3 @@
 unalias d
 alias vim="nvim"
-alias emacs="/usr/local/Cellar/emacs/24.4/Emacs.app/Contents/MacOS/Emacs -nw"
 alias fuck='$(thefuck $(fc -ln -1))'
