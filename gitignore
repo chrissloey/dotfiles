@@ -11,3 +11,5 @@ tmp/**/*
 .vscode/
 tsconfig.json
 config.codekit
+.#*
+.idea

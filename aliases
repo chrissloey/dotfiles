@@ -1,3 +1,6 @@
 unalias d
+alias vi="nvim"
 alias vim="nvim"
 alias fuck='$(thefuck $(fc -ln -1))'
+alias emacs='emacsclient -n -c -a ""'
+alias fixnotifications="launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist && killall NotificationCenter"
