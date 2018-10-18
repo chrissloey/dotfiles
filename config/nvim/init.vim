@@ -2,22 +2,16 @@
 let mapleader = " "
 
 " Plugins 
-call plug#begin('~/.nvim/plugged')
-
-Plug 'Shougo/vimproc.vim'
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Editing
-Plug 'dbakker/vim-projectroot'
 Plug 'vim-scripts/matchit.zip'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 
-" Notes
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
-
-" Statusbar 
-Plug 'bling/vim-airline'
+" Statusbar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Rails 
 Plug 'tpope/vim-rails'
@@ -29,33 +23,22 @@ Plug 'tpope/vim-endwise'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'thoughtbot/vim-rspec'
 
-" Elixir 
-Plug 'elixir-lang/vim-elixir'
-
 " CSS 
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'Rykka/colorv.vim'
 
-" JS
-Plug 'kchmck/vim-coffee-script'
-
 " Markdown 
 Plug 'plasticboy/vim-markdown'
 
-" Handlebars 
-Plug 'mustache/vim-mustache-handlebars'
-
 " Git 
 Plug 'airblade/vim-gitgutter'
-Plug 'mattn/webapi-vim' " gist-vim dependency
-Plug 'mattn/gist-vim'
 
 " Search 
-Plug 'Shougo/unite.vim'
-Plug 'rking/ag.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Colours 
-Plug 'croaky/vim-colors-github'
+Plug 'tomasr/molokai'
 
 " EditorConfig 
 Plug 'editorconfig/editorconfig-vim'
@@ -89,65 +72,6 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 0
 set shortmess=atTiOI
 
-" Gist 
-let g:gist_clip_command = 'pbcopy'
-let g:gist_open_browser_after_post = 1
-let g:gist_private = 1
-
-" Unite 
-
-" Excluded directories for unite
-call unite#custom_source('file_rec/async,file_rec,file_mru,file,buffer,grep',
-  \ 'ignore_pattern', join([
-  \ '\.git/',
-  \ '\.sass-cache/',
-  \ 'node_modules/',
-  \ 'bower_components/',
-  \ '\.svn/',
-  \ '\.hg/',
-  \ '\.bundle/',
-  \ 'vendor/',
-  \ 'tmp/',
-  \ 'log/',
-  \ 'public/system'
-  \ ], '\|'))
-
-" Ctrlp replacement
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
-
-" Build the ctrlp function, using projectroot to define the 
-" working directory.
-function! Unite_ctrlp()
-  execute ':Unite  -buffer-name=files -start-insert buffer file_rec/async:'.ProjectRootGuess().'/'
-endfunction
-
-" Call these custom settings on all unite buffers:
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  imap <buffer> <C-j> <Plug>(unite_select_next_line)
-  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-  imap <buffer> <c-a> <Plug>(unite_choose_action)
-
-  imap <silent><buffer><expr> <C-s> unite#do_action('split')
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-
-  nmap <buffer> <ESC> <Plug>(unite_exit)
-endfunction
-
-" Tell unit to use ag for searching
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-nnoremap <C-P> :call Unite_ctrlp()<cr>
-nnoremap <leader>y :Unite history/yank<cr>
-nnoremap <leader>s :Unite -quick-match buffer<cr>
-
 " Search
 set nohlsearch
 set incsearch
@@ -164,13 +88,8 @@ autocmd GUIEnter * set visualbell t_vb=
 
 " Style
 syntax on
-colorscheme github
-highlight NonText guibg=#060606
-highlight Folded  guibg=#0A0A0A guifg=#9090D0
+colorscheme molokai
 set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h11
-
-" Notes
-:let g:notes_directories = ['~/Dropbox/Notes']
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -201,7 +120,7 @@ let g:multi_cursor_exit_from_insert_mode = 0
 nnoremap Q <nop>
 
 " Switch between the last two files
-nnoremap <leader><leader> <c-^>
+nnoremap <leader><tab> <c-^>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -215,6 +134,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" Escaping term splits
+tnoremap <Esc> <C-\><C-n>
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
@@ -230,9 +152,9 @@ augroup vimrcEx
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
@@ -251,3 +173,23 @@ augroup vimrcEx
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
+
+" FZF / ripgrep
+
+set grepprg=rg\ --vimgrep
+
+" Setup :Find
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+nnoremap <leader>t :Files<cr>
+nnoremap <leader>/ :Find<cr>
